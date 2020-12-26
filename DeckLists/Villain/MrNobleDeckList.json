@@ -1,0 +1,410 @@
+﻿{    "name": "Mr. Noble",
+    "kind": "Villain",
+    "expansionIdentifier": "TheDragonRune",
+    "initialCardIdentifiers": [
+        "MrNobleCharacter"
+    ],
+    "cards": [
+        {
+            "identifier": "MrNobleCharacter",
+            "count": 1,
+            "title": "Mr. Noble",
+            "keywords": [
+                "villain"
+            ],
+            "body": "Business as Usual",
+            "backgroundColor": "d27e86",
+            "foilBackgroundColor": "CD96C0",
+            "character": true,
+            "hitpoints": 67,
+            "nemesisIdentifiers": [
+                "Conman"
+            ],
+            "setup": [
+                "At the start of the game, put {MrNoble}'s villain character cards into play, 'Business as Usual' side up.",
+				"Search the deck for 1 High Tier Enforcer and put them into play.",
+                "Search the deck for {H-3} Lower Tier Enforcers and put them into play, then Shuffle {MrNoble}'s Deck."
+            ],
+            "gameplay": [
+                "At the start of the villain turn, if no High Tier Enforcers are in Play, {MrNoble} Flips, {MrNoble} can only flip this way once per turn.",
+                "Increase damage by Enforcers by 2.",
+                "Reduce the first damage to {MrNoble} each turn by the number of Enforcers in Play.",
+                "At the end of {MrNoble}'s turn, the Enforcer with the highest hp deals the 2 heroes with the highest hp {H-1} projectile damage."
+            ],
+            "icons": [
+                "StartOfTurnAction",
+                "IncreaseDamageDealt",
+                "ReduceDamageTaken",
+                "DealDamageProjectile"
+            ],
+            "flippedBody": "Inheritor of Fafnir",
+            "flippedGameplay": [
+                "When {MrNoble} flips to this side, deal each hero target {H-2} projectile Damage.",
+                "At the start of {MrNoble}'s turn, if there are {H-1} Enforcers in play, {MrNoble} deals each hero target 1 melee damage and flips this card. {MrNoble} can only flip this way once per turn.",
+                "Increase {MrNoble}'s damage by the number of incapacitated heroes.",
+                "Reduce damage dealt to {MrNoble} by the number of incapacitated heroes.",
+                "At the end of {MrNoble}'s turn, deal the hero with the second lowest hp {H-2} melee and {H-2} Projectile damage, then play the top card of the Villain Deck."
+            ],
+            "flippedIcons": [
+                "StartOfTurnAction",
+                "IncreaseDamageDealt",
+                "ReduceDamageTaken",
+                "EndOfTurnAction"
+            ],
+            "difficulty": 2,
+            "openingLines": {
+                "default": "Mr. Noble Default Placeholder"
+            }
+        },
+        {
+            "identifier": "TheExterminator",
+            "count": 1,
+            "title": "The Exterminator",
+            "keywords": [
+                "high tier enforcer"
+            ],
+            "icons": [
+                "DealDamageToxic",
+                "ImmuneToDamage"
+            ],
+            "body": [
+                "At the end of the Villain turn, this card deals the hero with the highest hp 3 toxic damage.",
+                "{MrNoble} is immune to damage from Environment targets."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]",
+             "hitpoints": 20
+        },
+        {
+            "identifier": "TheLivingShadow",
+            "count": 1,
+            "title": "The Living Shadow",
+            "keywords": [
+                "high tier enforcer"
+            ],
+            "icons": [
+                "Destroy",
+                "ImmuneToDamagePsychic",
+                "ImmuneToDamageEnergy"
+            ],
+            "body": [
+                "At the start of the Villain turn, destroy an ongoing or equipment belonging to the hero with the most cards in play.",
+                "{MrNoble} is immune to Psychic and Energy Damage."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]",
+             "hitpoints": 17
+        },
+        {
+            "identifier": "OneShot",
+            "count": 1,
+            "title": "One-shot",
+            "keywords": [
+                "high tier enforcer"
+            ],
+            "icons": [
+                "DealDamageProjectile",
+                "ImmuneToDamageMelee",
+                "ImmuneToDamageProjectile"
+            ],
+            "body": [
+                "Whenever a Villain card is played from the deck, this card deals the hero with the second highest hp 4 irreducible projectile damage.",
+                "{MrNoble} is immune to Melee and Projectile Damage."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]",
+             "hitpoints": 15
+        },
+         {
+            "identifier": "LadySun",
+            "count": 1,
+            "title": "Lady Sun",
+            "keywords": [
+                "high tier enforcer"
+            ],
+            "icons": [
+                "Discard",
+                "DealDamageFire",
+                "ImmuneToDamageInfernal",
+                "ImmuneToDamageRadiant"
+            ],
+            "body": [
+                "At the start of the Villain turn, each hero may discard a card. This card deals any hero that did not discard a card this way 3 fire damage.",
+                "{MrNoble} is immune to Infernal and Radiant Damage."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]",
+             "hitpoints": 15
+        },
+        {
+            "identifier": "FrostFlameBrothers",
+            "count": 1,
+            "title": "Frost Flame Brothers",
+            "keywords": [
+                "mid tier enforcer"
+            ],
+            "icons": [
+                "DealDamageFire",
+                "DealDamageCold",
+                "ReduceDamageTaken"
+            ],
+            "body": [
+                "The first time an enforcer is dealt damage each turn, this card deals each hero 1 fire and 1 cold damage.",
+                "Reduce damage to Enforcers by 1."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]",
+             "hitpoints": 10
+        },
+        {
+            "identifier": "TheGunnCouple",
+            "count": 1,
+            "title": "The Gunn Couple",
+            "keywords": [
+                "mid tier enforcer"
+            ],
+            "icons": [
+                "StartOfTurnAction",
+                "EndOfTurnAction",
+                "DealDamageProjectile",
+                "IncreaseDamageDealt"
+            ],
+            "body": [
+                "At the Start and end of the Villain turn, this card deals the hero with the highest hp 2 projectile damage",
+                "Increase damage dealt by other Enforcers by 1."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]",
+             "hitpoints": 13
+        },
+        {
+            "identifier": "AndvariSoldiers",
+            "count": 5,
+            "title": "Andvari Soldiers",
+            "keywords": [
+                "lower tier enforcer"
+            ],
+            "icons": [
+                "EndOfTurnAction",
+                "DealDamageMelee",
+                "RedirectDamage"
+            ],
+            "body": [
+                "At the end of the Villain turn, this card deals the hero with the lowest hp 1 melee damage.",
+                "Redirect damage dealt to {MrNoble} and High tier Enforcers to this card."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]",
+             "hitpoints": 5
+        },
+       {
+            "identifier": "RecruitmentDrive",
+            "count": 2,
+            "title": "Recruitment Drive",
+            "keywords": [
+                "one-shot"
+            ],
+            "icons": [
+                "Manipulate"
+            ],
+            "body": [
+                "Reveal the top {H} cards of the Villain deck, put all Enforcers revealed this way into play, and discard the rest. Then shuffle the villain deck."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]"
+        },
+        {
+            "identifier": "LeadershipOfGreed",
+            "count": 2,
+            "title": "Leadership Of Greed",
+            "keywords": [
+                "ongoing"
+            ],
+            "icons": [
+                "IncreaseDamageDealt"
+            ],
+            "body": [
+                "Increase damage dealt by Villain Targets by 2."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]"
+        },
+        {
+            "identifier": "TrueColors",
+            "count": 1,
+            "title": "True Colors",
+            "keywords": [
+                "one-shot"
+            ],
+            "icons": [
+                "DealDamageMelee"
+            ],
+            "body": [
+                "Each enforcer deals 1 melee damage to the hero target with the highest hp."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]"
+        },
+        {
+            "identifier": "AssetRecovery",
+            "count": 3,
+            "title": "Asset Recovery",
+            "keywords": [
+                "one-shot"
+            ],
+            "icons": [
+                "Manipulate"
+            ],
+            "body": [
+                "Shuffle the villain trash into the deck. Then, reveal cards from the top of the Villain deck until a Lower Tier Enforcer is revealed. Put it into play. Shuffle the other revealed cards into the Villain deck."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]"
+        },
+        {
+            "identifier": "BrutalBusinessPractices",
+            "count": 2,
+            "title": "Brutal Business Practices",
+            "keywords": [
+                "ongoing"
+            ],
+            "icons": [
+                "ReduceDamageTaken",
+                "IncreaseDamageDealt"
+            ],
+            "body": [
+                "Reduce damage dealt to Villain targets by 1 and increase damage to Environment Targets by 3."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]"
+        },
+        {
+            "identifier": "LandTakeover",
+            "count": 2,
+            "title": "Land Takeover",
+            "keywords": [
+                "one-shot"
+            ],
+            "icons": [
+                "DestroyEnvironment",
+                "DealDamageFire",
+                "PlayCardNow"
+            ],
+            "body": [
+                "Destroy the environment target with the lowest hp. If a target is destroyed, {MrNoble} deals each Hero target 2 Fire Damage, if not destroy all environment cards.",
+                "Play the top card of the Villain Deck."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]"
+        },
+        {
+            "identifier": "Lawsuits",
+            "count": 1,
+            "title": "Lawsuits",
+            "keywords": [
+                "one-shot"
+            ],
+            "icons": [
+                "DestroyEquipment",
+                "PlayCardNow"
+            ],
+            "body": [
+                "Destroy all equipment cards. Then, play the top of the Villain Deck."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]"
+        },
+         {
+            "identifier": "IntimidatingPresence",
+            "count": 1,
+            "title": "Intimidating Presence",
+            "keywords": [
+                "one-shot"
+            ],
+            "icons": [
+                "DestroyOngoing",
+                "PlayCardNow"
+            ],
+            "body": [
+                "Destroy all ongoing cards. Then, play the top of the Villain Deck."
+            ],
+            "flavorQuotes": [
+                {
+                    "identifier": "MrNoble",
+                    "text": "-"
+                }
+            ],
+            "flavorReference": "Mr. Noble, [Insert Book Name]"
+        }
+    ]
+}

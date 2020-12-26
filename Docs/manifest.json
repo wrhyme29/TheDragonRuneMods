@@ -1,0 +1,20 @@
+{
+	"title": "TheDragonRune",
+	"author": "The Dragon Rune",
+	"description":[
+		"These decks are designed by TheDragonRune and implemented by wrhyme29",
+	],
+	"version": "v1.0",
+	"credits": "",
+	"namespace": "TheDragonRune",
+	"dll": "TheDragonRuneMods.dll",
+	"decks": {
+		"heroes": [	
+		],
+		"villains": [
+		"MrNoble"
+		],
+		"environments": [
+		]
+	}
+}
