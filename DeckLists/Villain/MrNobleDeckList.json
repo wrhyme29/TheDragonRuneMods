@@ -51,7 +51,7 @@
                 "ReduceDamageTaken",
                 "EndOfTurnAction"
             ],
-            "difficulty": 2,
+            "difficulty": 4,
             "openingLines": {
                 "default": "Mr. Noble Default Placeholder"
             }
