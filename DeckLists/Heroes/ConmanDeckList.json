@@ -1,0 +1,449 @@
+{
+	"name": "Conman",
+	"kind": "Hero",
+	"expansionIdentifier": "TheDragonRune",
+	"initialCardIdentifiers": [
+		"ConmanCharacter"
+	],
+	"cards": [{
+			"identifier": "ConmanCharacter",
+			"count": 1,
+			"title": "Conman",
+			"body": "Was That Me?",
+			"backgroundColor": "D1D2D4",
+			"foilBackgroundColor": "D1D2D4",
+			"hitpointColor": "EA7527",
+			"character": true,
+			"powers": [
+				"The next time {Conman} would take Damage, redirect it to another  hero target and reduce the damage by 2."
+			],
+			"icons": [
+				"HasPower",
+				"RedirectDamage"
+			],
+			"hitpoints": 31,
+			"nemesisIdentifiers": [
+				"Conman"
+			],
+			"incapacitatedAbilities": [
+				"One hero may use a power now.",
+				"One hero may play a card now.",
+				"Select a hero target. The next time that target would be dealt damage, redirect that damage to another target."
+			],
+			"flippedIcons": [
+				"UsePowerNow",
+				"PlayCardNow",
+				"RedirectDamage"
+			],
+			"openingLines": {
+				"default": "Conman Opening Line PlaceHolder"
+			},
+			"complexity": 3
+		},
+		{
+			"identifier": "IMisleadYou",
+			"count": 3,
+			"title": "I Mislead You?",
+			"keywords": [
+				"one-shot",
+				"illusion"
+			],
+			"icons": [
+				"DealDamagePsychic",
+				"ReduceDamageDealt"
+			],
+			"body": [
+				"Deal 2 psychic damage to a target. Reduce the next damage they would deal by 1."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "InspiringAttack",
+			"count": 2,
+			"title": "'Inspiring' Attack",
+			"keywords": [
+				"one-shot"
+			],
+			"icons": [
+				"DealDamagePsychic",
+				"GainHP"
+			],
+			"body": [
+				"Deal 1 psychic damage to a villain target. Each other hero targets gains 2 hp."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "TeleportSpam",
+			"count": 3,
+			"title": "Teleport Spam",
+			"keywords": [
+				"ongoing",
+				"teleport",
+				"limited"
+			],
+			"icons": [
+				"RedirectDamage"
+			],
+			"body": [
+				"The first time each turn {Conman} would take damage, redirect it to a Villain Target."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "TooCloseToHome",
+			"count": 2,
+			"title": "TOO Close to Home",
+			"keywords": [
+				"ongoing",
+				"illusion"
+			],
+			"icons": [
+				"ReduceDamageDealt"
+			],
+			"body": [
+				"Reduce the first damage dealt each turn by a Villain target by 1."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "WhosThatNextToYou",
+			"count": 3,
+			"title": "Who's That Next to You",
+			"keywords": [
+				"one-shot",
+				"illusion"
+			],
+			"icons": [
+				"DealDamageMelee"
+			],
+			"body": [
+				"One Villain Target deals 2 melee damage to another target."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "MyStuffNow",
+			"count": 2,
+			"title": "My Stuff Now",
+			"keywords": [
+				"one-shot"
+			],
+			"icons": [
+				"DealDamageMelee"
+			],
+			"body": [
+				"Choose a Villain target, reduce all damage they would deal by X until the start of {Conman}’s turn, where X = the number of Illusions and teleports in {Conman}’s Trash."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "TeleportingPunch",
+			"count": 5,
+			"title": "TeleportingPunch",
+			"keywords": [
+				"one-shot",
+				"teleport"
+			],
+			"icons": [
+				"DealDamageMelee"
+			],
+			"body": [
+				"Deal 2 Melee Damage to 2 different Targets."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "SwitcherooStrikes",
+			"count": 2,
+			"title": "Switcheroo Strikes",
+			"keywords": [
+				"ongoing"
+			],
+			"icons": [
+				"HasPower",
+				"DealDamageMelee",
+				"DealDamagePsychic"
+			],
+			"powers": [
+				"Deal X targets 1 melee and 3 psychic damage, where X is the number of teleports in play and in {Conman}’s Trash."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "ImOutOfHere",
+			"count": 2,
+			"title": "I'm Out of Here",
+			"keywords": [
+				"ongoing",
+				"limited",
+				"teleport",
+				"illusion"
+			],
+			"icons": [
+				"DealDamagePsychic",
+				"RedirectDamage",
+				"DestroySelf",
+				"Manipulate"
+			],
+			"body": [
+				"When this card enters play, {Conman} deals himself 5 psychic damage. If {Conman} takes damage that way, the first time a turn {Conman} would take damage redirect it to the Villain Target with the highest hp and increase the damage by 1.",
+				"At the end of {Conman}’s next turn, destroy this card and shuffle it and {Conman}'s trash into {Conman}’s deck."
+
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "MyTimeToShine",
+			"count": 1,
+			"title": "My Time to Shine",
+			"keywords": [
+				"one-shot"
+			],
+			"icons": [
+				"Manipulate",
+				"DealDamagePsychic",
+				"DealDamageMelee",
+				"GainHP"
+			],
+			"body": [
+				"Shuffle all cards in each trash into their respective decks.",
+				"For every 3 cards shuffled from the trash this way, {Conman} may deal up to that many targets 2 melee damage, and 1 psychic damage.",
+				"For every 5 cards shuffled this way, gain 1 hp.",
+				"If 40 cards are shuffled this way, return this card to your hand instead of it going into the trash"
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "IllusionAndFusion",
+			"count": 5,
+			"title": "Illusion and Fusion",
+			"keywords": [
+				"one-shot",
+				"illusion"
+			],
+			"icons": [
+				"Manipulate",
+				"PlayCardNow",
+				"DrawCardNow",
+				"UsePowerNow"
+			],
+			"body": [
+				"Shuffle a Non-Character Card target back into their respective deck.",
+				"If that target was in a hero’s Play area, that hero may play a card now.",
+				"If that target in a Villan play area, you may draw a card.",
+				"If that target was in an Environment play area, you may use a power now."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "ShadowedIllusion",
+			"count": 1,
+			"title": "Shadowed Illusion",
+			"keywords": [
+				"ongoing",
+				"illusion",
+				"changeling"
+			],
+			"icons": [
+				"Manipulate",
+				"ReduceDamageTaken",
+				"IncreaseDamageDealt"
+			],
+			"body": [
+				"When this card enters play shuffle all other Changeling cards into {Conman}’s deck.",
+				"Reduce damage dealt to hero targets by 2 and increase damage dealt by {Conman} by 1."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "RavagerIllusion",
+			"count": 1,
+			"title": "Ravager Illusion",
+			"keywords": [
+				"ongoing",
+				"illusion",
+				"changeling"
+			],
+			"icons": [
+				"Manipulate",
+				"ReduceDamageTaken",
+				"IncreaseDamageDealt"
+			],
+			"body": [
+				"When this card enters play shuffle all other Changeling cards into {Conman}’s deck.",
+				"Increase damage dealt by Hero targets by 1, and reduce damage dealt to {Conman} by 1."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "WindIllusion",
+			"count": 1,
+			"title": "Wind Illusion",
+			"keywords": [
+				"ongoing",
+				"illusion",
+				"changeling"
+			],
+			"icons": [
+				"Manipulate",
+				"UsePowerExtra",
+				"PlayCardExtra"
+			],
+			"body": [
+				"When this card enters play shuffle all other Changeling cards into {Conman}’s deck.",
+				"{Conman} may play another card and use an additional power on his turn."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "EarthIllusion",
+			"count": 1,
+			"title": "Earth Illusion",
+			"keywords": [
+				"ongoing",
+				"illusion",
+				"changeling"
+			],
+			"icons": [
+				"CannotPlayCards",
+				"CannotUsePowers",
+				"PlayCardNow",
+				"UsePowerNow"
+			],
+			"body": [
+				"When this card enters play shuffle all other Changeling cards into {Conman}’s deck.",
+				"{Conman} may not Play card or use powers.",
+				"At the end of {Conman}’s turn, one other player may play a card or use a power.",
+				"At the start of {Conman}’s turn, you may shuffle this card into the deck."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "LastingIllusion",
+			"count": 1,
+			"title": "Lasting Illusion",
+			"keywords": [
+				"ongoing",
+				"illusion",
+				"changeling"
+			],
+			"icons": [
+				"Manipulate",
+				"DrawCardNow"
+			],
+			"body": [
+				"When this card enters play shuffle all other Changeling cards into {Conman}’s deck.",
+				"If this card would be shuffled into the deck from play, you may discard a card instead.",
+				"During {Conman}’s draw phase, one other hero may also draw a card."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "MoreOfMe",
+			"count": 2,
+			"title": "More of Me!",
+			"keywords": [
+				"ongoing",
+				"limited"
+			],
+			"icons": [
+				"UsePowerExtra",
+				"DrawCardNow"
+			],
+			"body": [
+				"If there is a Changeling card in play, {Conman} may use an extra power on his turn.",
+				"Whenever a Changeling card would be destroyed, you may destroy this card instead."
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		},
+		{
+			"identifier": "NeverToldYouALie",
+			"count": 3,
+			"title": "Never Told You a Lie",
+			"keywords": [
+				"one-shot"
+			],
+			"icons": [
+				"DealDamagePsychic",
+				"CannotDealDamage"
+			],
+			"body": [
+				"Deal 2 targets 2 psychic damage. Those targets cannot deal damage until {Conman}'s next turn"
+			],
+			"flavorQuotes": [{
+				"identifier": "Conman",
+				"text": "-"
+			}],
+			"flavorReference": "Conman"
+		}
+	]
+}
