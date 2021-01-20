@@ -28,7 +28,7 @@ namespace TheDragonRune.Conman
             }
 
             IEnumerable<Card> changelings = GetChangelingCardsInPlay().Where(c => c != Card);
-            coroutine = GameController.ShuffleCardsIntoLocation(HeroTurnTakerController, changelings, TurnTaker.Deck, individualMoves: true, cardSource: GetCardSource());
+            coroutine = ShuffleCardsIntoLocationWithCondition(HeroTurnTakerController, changelings, TurnTaker.Deck);
             if (base.UseUnityCoroutines)
             {
                 yield return base.GameController.StartCoroutine(coroutine);
@@ -40,6 +40,34 @@ namespace TheDragonRune.Conman
             yield break;
         }
 
+		public IEnumerator ShuffleCardsIntoLocationWithCondition(HeroTurnTakerController decisionMaker, IEnumerable<Card> cards, Location location)
+		{
+			List<MoveCardAction> storedMove = new List<MoveCardAction>();
+            IEnumerator coroutine = GameController.MoveCards(decisionMaker, cards, location, showIndividualMessages: true, storedResultsAction: storedMove, cardSource: GetCardSource());
+			if (UseUnityCoroutines)
+			{
+				yield return GameController.StartCoroutine(coroutine);
+			}
+			else
+			{
+				GameController.ExhaustCoroutine(coroutine);
+			}
 
-    }
+            if (DidMoveCard(storedMove))
+            {
+                coroutine = GameController.ShuffleLocation(TurnTaker.Deck, cardSource: GetCardSource());
+                if (UseUnityCoroutines)
+                {
+                    yield return GameController.StartCoroutine(coroutine);
+                }
+                else
+                {
+                    GameController.ExhaustCoroutine(coroutine);
+                }
+            }
+            yield break;
+		}
+
+
+	}
 }

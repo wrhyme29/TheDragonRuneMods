@@ -194,5 +194,48 @@ namespace TheDragonRuneTest
 
         }
 
+        [Test()]
+        public void TestLastingIllusion_DrawCard()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "TheScholar", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            GoToPlayCardPhase(conman);
+            Card changeling = PlayCard("WindIllusion");
+            AssertInPlayArea(conman, changeling);
+            //When this card enters play shuffle all other Changeling cards into {Conman}’s deck."
+            QuickShuffleStorage(conman.TurnTaker.Deck);
+            Card last = PlayCard("LastingIllusion");
+            AssertInDeck(changeling);
+            AssertInPlayArea(conman, last);
+            QuickShuffleCheck(1);
+            //During {Conman}’s draw phase, one other hero may also draw a card.
+            DecisionSelectTurnTaker = legacy.TurnTaker;
+            QuickHandStorage(conman, legacy, bunker, scholar);
+            GoToDrawCardPhase(conman);
+            QuickHandCheck(0, 1, 0, 0);
+
+        }
+
+        [Test()]
+        public void TestLastingIllusion_PreventShuffle()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "TheScholar", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            GoToPlayCardPhase(conman);
+            Card last = PlayCard("LastingIllusion");
+            AssertInPlayArea(conman, last);
+            //When this card enters play shuffle all other Changeling cards into {Conman}’s deck."
+            QuickShuffleStorage(conman.TurnTaker.Deck);
+            Card changeling = PutInDeck("WindIllusion");
+            DecisionSelectCard = GetRandomCardFromHand(conman);
+            PlayCard(changeling);
+            AssertInPlayArea(conman, changeling);
+            AssertInPlayArea(conman, last);
+            QuickShuffleCheck(0);
+
+        }
+
     }
 }
