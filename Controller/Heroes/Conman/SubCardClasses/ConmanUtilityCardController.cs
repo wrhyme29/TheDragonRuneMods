@@ -14,6 +14,18 @@ namespace TheDragonRune.Conman
 
         }
 
+		public static readonly string ChangelingKeyword = "changeling";
 
-    }
+		protected bool IsChangeling(Card card)
+		{
+			return card != null && base.GameController.DoesCardContainKeyword(card, ChangelingKeyword);
+		}
+
+
+		protected IEnumerable<Card> GetChangelingCardsInPlay()
+		{
+			return FindCardsWhere((Card c) => c.IsInPlayAndHasGameText && IsChangeling(c));
+		}
+
+	}
 }
