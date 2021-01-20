@@ -49,15 +49,65 @@ namespace TheDragonRune.Conman
 			{
 				case 0:
 					{
-						
+						//One hero may use a power now.
+						IEnumerator coroutine = base.GameController.SelectHeroToUsePower(DecisionMaker, optionalSelectHero: false, optionalUsePower: true, allowAutoDecide: false, null, null, null, omitHeroesWithNoUsablePowers: true, canBeCancelled: true, GetCardSource());
+						if (base.UseUnityCoroutines)
+						{
+							yield return base.GameController.StartCoroutine(coroutine);
+						}
+						else
+						{
+							base.GameController.ExhaustCoroutine(coroutine);
+						}
 						break;
 					}
 				case 1:
 					{
+						//One hero may play a card now.
+						IEnumerator coroutine2 = SelectHeroToPlayCard(DecisionMaker);
+						if (base.UseUnityCoroutines)
+						{
+							yield return base.GameController.StartCoroutine(coroutine2);
+						}
+						else
+						{
+							base.GameController.ExhaustCoroutine(coroutine2);
+						}
 						break;
 					}
 				case 2:
 					{
+						//Select a hero target. The next time that target would be dealt damage, redirect that damage to another target.
+						List<SelectCardDecision> storedResults = new List<SelectCardDecision>();
+						IEnumerator coroutine = GameController.SelectCardAndStoreResults(HeroTurnTakerController, SelectionType.RedirectDamage, new LinqCardCriteria(c => c.IsHero && c.IsTarget && c != Card && c.IsInPlayAndHasGameText, "hero target"), storedResults, false, cardSource: GetCardSource());
+						if (base.UseUnityCoroutines)
+						{
+							yield return base.GameController.StartCoroutine(coroutine);
+						}
+						else
+						{
+							base.GameController.ExhaustCoroutine(coroutine);
+						}
+						if (DidSelectCard(storedResults))
+						{
+							Card target = GetSelectedCard(storedResults);
+							RedirectDamageStatusEffect redirectDamageStatusEffect = new RedirectDamageStatusEffect();
+							redirectDamageStatusEffect.TargetCriteria.IsSpecificCard = target;
+							redirectDamageStatusEffect.RedirectableTargets.IsTarget = true;
+							redirectDamageStatusEffect.NumberOfUses = 1;
+							if (!base.GameController.StatusEffectControllers.Any((StatusEffectController sec) => sec.StatusEffect is RedirectDamageStatusEffect rd && rd.TargetCriteria.IsSpecificCard == target))
+							{
+								coroutine = AddStatusEffect(redirectDamageStatusEffect);
+								if (base.UseUnityCoroutines)
+								{
+									yield return base.GameController.StartCoroutine(coroutine);
+								}
+								else
+								{
+									base.GameController.ExhaustCoroutine(coroutine);
+								}
+							}
+						}
 						break;
 					}
 			}

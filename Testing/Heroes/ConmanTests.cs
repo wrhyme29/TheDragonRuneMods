@@ -54,5 +54,27 @@ namespace TheDragonRuneTest
 
         }
 
+        [Test()]
+        public void TestConmanIncap3()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "TheScholar", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            SetupIncap(baron);
+            //Select a hero target. The next time that target would be dealt damage, redirect that damage to another target.
+            DecisionSelectCards = new Card[] { bunker.CharacterCard, bunker.CharacterCard, baron.CharacterCard };
+            UseIncapacitatedAbility(conman, 2);
+            //check for no stacking
+            UseIncapacitatedAbility(conman, 2);
+
+            QuickHPStorage(baron, legacy, bunker, scholar);
+            DealDamage(baron, bunker, 5, DamageType.Fire);
+            QuickHPCheck(-5, 0, 0, 0);
+            //next only
+            QuickHPUpdate();
+            DealDamage(baron, bunker, 5, DamageType.Fire);
+            QuickHPCheck(0, 0, -5, 0);
+        }
+
     }
 }
