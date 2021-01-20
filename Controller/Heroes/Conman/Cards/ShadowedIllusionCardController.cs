@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace TheDragonRune.Conman
 {
-    public class ShadowedIllusionCardController : ChanglingCardController
+    public class ShadowedIllusionCardController : ChangelingCardController
     {
 
         public ShadowedIllusionCardController(Card card, TurnTakerController turnTakerController) : base(card, turnTakerController)
