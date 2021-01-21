@@ -270,6 +270,31 @@ namespace TheDragonRuneTest
             QuickHPCheck(-1,-3,-2,-2);
 
         }
+        [Test()]
+        public void TestShadowedIllusion()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "TheScholar", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            GoToPlayCardPhase(conman);
+            Card changeling = PlayCard("WindIllusion");
+            AssertInPlayArea(conman, changeling);
+            //When this card enters play shuffle all other Changeling cards into {Conman}’s deck."
+            QuickShuffleStorage(conman.TurnTaker.Deck);
+            Card shadow = PlayCard("ShadowedIllusion");
+            AssertInDeck(changeling);
+            AssertInPlayArea(conman, shadow);
+            QuickShuffleCheck(1);
+            //Reduce damage dealt to hero targets by 2 and increase damage dealt by {Conman} by 1.
+            QuickHPStorage(baron);
+            DealDamage(conman, baron, 2, DamageType.Fire);
+            QuickHPCheck(-3);
+            QuickHPStorage(conman, legacy, bunker, scholar);
+            DealDamage(baron, (Card c) => c.IsHero, 3, DamageType.Fire);
+            QuickHPCheck(-1, -2, -1, -1);
+
+        }
+
 
     }
 }
