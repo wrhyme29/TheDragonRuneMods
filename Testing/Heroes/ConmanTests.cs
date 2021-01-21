@@ -492,6 +492,18 @@ namespace TheDragonRuneTest
             AssertInDeck(card);
             QuickShuffleCheck(1);
         }
-
+        [Test()]
+        public void TestInspiringAttack()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            SetHitPoints(new Card[] { conman.CharacterCard, legacy.CharacterCard, bunker.CharacterCard, luminary.CharacterCard }, 10);
+            //Deal 1 psychic damage to a villain target. Each other hero targets gains 2 hp.
+            DecisionSelectTarget = baron.CharacterCard;
+            QuickHPStorage(baron, conman, legacy, bunker, luminary);
+            PlayCard("InspiringAttack");
+            QuickHPCheck(-1, 0, 2, 2, 2);
+        }
     }
 }
