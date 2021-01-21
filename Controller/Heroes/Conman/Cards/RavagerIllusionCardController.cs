@@ -14,6 +14,13 @@ namespace TheDragonRune.Conman
 
         }
 
+        public override void AddTriggers()
+        {
+            //Increase damage dealt by Hero targets by 1, and reduce damage dealt to {Conman} by 1.
+            AddIncreaseDamageTrigger((DealDamageAction dd) => dd.DamageSource != null && dd.DamageSource.IsHero && dd.DamageSource.IsTarget, 1);
+            AddReduceDamageTrigger((Card c) => c == CharacterCard, 1);
+        }
+
 
     }
 }

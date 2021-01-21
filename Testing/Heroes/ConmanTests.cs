@@ -237,5 +237,39 @@ namespace TheDragonRuneTest
 
         }
 
+        [Test()]
+        public void TestRavagerIllusion()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "TheScholar", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            GoToPlayCardPhase(conman);
+            Card changeling = PlayCard("WindIllusion");
+            AssertInPlayArea(conman, changeling);
+            //When this card enters play shuffle all other Changeling cards into {Conman}’s deck."
+            QuickShuffleStorage(conman.TurnTaker.Deck);
+            Card ravage = PlayCard("RavagerIllusion");
+            AssertInDeck(changeling);
+            AssertInPlayArea(conman, ravage);
+            QuickShuffleCheck(1);
+            //Increase damage dealt by Hero targets by 1, and reduce damage dealt to {Conman} by 1.
+            QuickHPStorage(baron);
+            DealDamage(conman, baron, 2, DamageType.Fire);
+            QuickHPCheck(-3);
+            QuickHPUpdate();
+            DealDamage(legacy, baron, 2, DamageType.Fire);
+            QuickHPCheck(-4);
+            QuickHPUpdate();
+            DealDamage(bunker, baron, 2, DamageType.Fire);
+            QuickHPCheck(-3);
+            QuickHPUpdate();
+            DealDamage(scholar, baron, 2, DamageType.Fire);
+            QuickHPCheck(-3);
+            QuickHPStorage(conman, legacy, bunker, scholar);
+            DealDamage(baron, (Card c) => c.IsHero, 2, DamageType.Fire);
+            QuickHPCheck(-1,-3,-2,-2);
+
+        }
+
     }
 }
