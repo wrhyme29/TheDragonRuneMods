@@ -317,7 +317,71 @@ namespace TheDragonRuneTest
             AssertPhaseActionCount(2);
 
         }
+        [Test()]
+        public void TestIllusionAndFusion_Villain()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            //Shuffle a Non-Character Card target back into their respective deck.
+            //If that target in a Villan play area, you may draw a card.
+            Card mdp = GetCardInPlay("MobileDefensePlatform");
+            Card turret = PlayCard("RegressionTurret");
+            DecisionSelectCard = mdp;
+            QuickHandStorage(conman);
+            QuickShuffleStorage(baron.TurnTaker.Deck);
+            PlayCard("IllusionAndFusion");
+            AssertInDeck(mdp);
+            QuickShuffleCheck(1);
+            QuickHandCheck(1);
 
+        }
+
+        [Test()]
+        public void TestIllusionAndFusion_Hero()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Luminary", "TheScholar", "Megalopolis");
+            StartGame();
+            //Shuffle a Non-Character Card target back into their respective deck.
+            //If that target in a Villan play area, you may draw a card.
+
+            Card turret = PlayCard("RegressionTurret");
+            Card hand = PutInHand("BacklashGenerator");
+            DecisionSelectCards = new Card[] { turret, hand };
+            QuickShuffleStorage(luminary.TurnTaker.Deck);
+            PlayCard("IllusionAndFusion");
+            QuickShuffleCheck(1);
+            AssertInDeck(turret);
+            AssertInPlayArea(luminary, hand);
+            
+        }
+
+        [Test()]
+        public void TestIllusionAndFusion_Environment()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Luminary", "Bunker", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            //Shuffle a Non-Character Card target back into their respective deck.
+            //If that target was in an Environment play area, you may use a power now.
+            Card envTarget = PlayCard("TargetingInnocents");
+            Card turret = PlayCard("RegressionTurret");
+            DecisionSelectCards = new Card[] { envTarget };
+            QuickShuffleStorage(env.TurnTaker.Deck);
+            PlayCard("IllusionAndFusion");
+            QuickShuffleCheck(1);
+            AssertInDeck(envTarget);
+
+            SelectCardsForNextDecision(bunker.CharacterCard);
+            QuickHPStorage(baron, conman, legacy, bunker, luminary);
+            DealDamage(baron, conman, 5, DamageType.Melee);
+            QuickHPCheck(0, 0, 0, -3, 0);
+
+            //only next damage
+            QuickHPUpdate();
+            DealDamage(baron, conman, 5, DamageType.Melee);
+            QuickHPCheck(0, -5, 0, 0, 0);
+
+        }
 
     }
 }
