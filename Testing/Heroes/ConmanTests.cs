@@ -505,5 +505,43 @@ namespace TheDragonRuneTest
             PlayCard("InspiringAttack");
             QuickHPCheck(-1, 0, 2, 2, 2);
         }
+
+        [Test()]
+        public void TestMoreOfMe()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            //"If there is a Changeling card in play, {Conman} may use an extra power on his turn.",
+            Card changeling = PlayCard("ShadowedIllusion");
+            Card more = PlayCard("MoreOfMe");
+            GoToUsePowerPhase(conman);
+            AssertPhaseActionCount(2);
+
+            //"Whenever a Changeling card would be destroyed, you may destroy this card instead."
+            DecisionYesNo = true;
+            DestroyCard(changeling);
+            AssertInTrash(more);
+            AssertInPlayArea(conman, changeling);
+        }
+        [Test()]
+        public void TestMoreOfMe_OptionalDestroy()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            //"If there is a Changeling card in play, {Conman} may use an extra power on his turn.",
+            Card changeling = PlayCard("ShadowedIllusion");
+            Card more = PlayCard("MoreOfMe");
+            GoToUsePowerPhase(conman);
+            AssertPhaseActionCount(2);
+
+            //"Whenever a Changeling card would be destroyed, you may destroy this card instead."
+            DecisionYesNo = false;
+            DestroyCard(changeling);
+            AssertInTrash(changeling);
+            AssertInPlayArea(conman, more);
+        }
+
     }
 }

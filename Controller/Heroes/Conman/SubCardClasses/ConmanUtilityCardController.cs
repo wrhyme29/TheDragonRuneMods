@@ -1,6 +1,6 @@
 ﻿using Handelabra.Sentinels.Engine.Controller;
 using Handelabra.Sentinels.Engine.Model;
-using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -25,6 +25,11 @@ namespace TheDragonRune.Conman
 		protected IEnumerable<Card> GetChangelingCardsInPlay()
 		{
 			return FindCardsWhere((Card c) => c.IsInPlayAndHasGameText && IsChangeling(c));
+		}
+
+		protected bool IsChangelingCardInPlay()
+		{
+			return FindCardsWhere((Card c) => c.IsInPlayAndHasGameText && IsChangeling(c)).Any();
 		}
 
 	}
