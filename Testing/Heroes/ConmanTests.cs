@@ -402,5 +402,96 @@ namespace TheDragonRuneTest
             QuickHPCheck(-2);
         }
 
+        [Test()]
+        public void TestImOutOfHere()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+
+            GoToPlayCardPhase(conman);
+            //When this card enters play, {Conman} deals himself 5 psychic damage. 
+            QuickHPStorage(conman);
+            Card card = GetCard("ImOutOfHere");
+            IEnumerable<Card> putInTrash = FindCardsWhere(c => conman.TurnTaker.Deck.HasCard(c) && c != card).Take(5);
+            PutInTrash(putInTrash);
+            PlayCard(card);
+            QuickHPCheck(-5);
+            //If {Conman} takes damage that way, the first time a turn {Conman} would take damage redirect it to the Villain Target with the highest hp and increase the damage by 1.",
+            //At the end of {Conman}’s next turn, destroy this card and shuffle it and {Conman}'s trash into {Conman}’s deck."
+            AssertNumberOfCardsInTrash(conman, 5);
+            GoToEndOfTurn(conman);
+            AssertInPlayArea(conman, card);
+            AssertNumberOfCardsInTrash(conman, 5);
+
+            GoToNextTurn();
+            QuickHPStorage(baron, conman, legacy, bunker, luminary);
+            DealDamage(bunker, conman, 5, DamageType.Fire);
+            QuickHPCheck(-6, 0, 0, 0, 0);
+
+            //only first damage
+            QuickHPUpdate();
+            DealDamage(bunker, conman, 5, DamageType.Fire);
+            QuickHPCheck(0, -5, 0, 0, 0);
+
+            //resets at next turn
+            GoToNextTurn();
+            QuickHPUpdate();
+            DealDamage(bunker, conman, 5, DamageType.Fire);
+            QuickHPCheck(-6, 0, 0, 0, 0);
+
+            QuickShuffleStorage(conman.TurnTaker.Deck);
+            GoToEndOfTurn(conman);
+            AssertNumberOfCardsInTrash(conman, 0);
+            AssertInDeck(putInTrash);
+            AssertInDeck(card);
+            QuickShuffleCheck(1);
+        }
+
+        [Test()]
+        public void TestImOutOfHere_NoInitialDamage()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+
+            GoToPlayCardPhase(conman);
+            //When this card enters play, {Conman} deals himself 5 psychic damage. 
+            QuickHPStorage(conman);
+            Card card = GetCard("ImOutOfHere");
+            IEnumerable<Card> putInTrash = FindCardsWhere(c => conman.TurnTaker.Deck.HasCard(c) && c != card).Take(5);
+            PutInTrash(putInTrash);
+            AddImmuneToNextDamageEffect(conman, false, true);
+            PlayCard(card);
+            QuickHPCheck(0);
+            //If {Conman} takes damage that way, the first time a turn {Conman} would take damage redirect it to the Villain Target with the highest hp and increase the damage by 1.",
+            //At the end of {Conman}’s next turn, destroy this card and shuffle it and {Conman}'s trash into {Conman}’s deck."
+            AssertNumberOfCardsInTrash(conman, 5);
+            GoToEndOfTurn(conman);
+            AssertInPlayArea(conman, card);
+            AssertNumberOfCardsInTrash(conman, 5);
+
+            GoToNextTurn();
+            QuickHPStorage(baron, conman, legacy, bunker, luminary);
+            DealDamage(bunker, conman, 5, DamageType.Fire);
+            QuickHPCheck(0, -5, 0, 0, 0);
+
+            QuickHPUpdate();
+            DealDamage(bunker, conman, 5, DamageType.Fire);
+            QuickHPCheck(0, -5, 0, 0, 0);
+
+            GoToNextTurn();
+            QuickHPUpdate();
+            DealDamage(bunker, conman, 5, DamageType.Fire);
+            QuickHPCheck(0, -5, 0, 0, 0);
+
+            QuickShuffleStorage(conman.TurnTaker.Deck);
+            GoToEndOfTurn(conman);
+            AssertNumberOfCardsInTrash(conman, 0);
+            AssertInDeck(putInTrash);
+            AssertInDeck(card);
+            QuickShuffleCheck(1);
+        }
+
     }
 }
