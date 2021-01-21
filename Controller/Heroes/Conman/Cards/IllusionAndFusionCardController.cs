@@ -31,6 +31,15 @@ namespace TheDragonRune.Conman
             {
                 //Shuffle it into their respective deck.
                 Card selectedCard = GetSelectedCard(storedResults);
+                coroutine = GameController.SendMessageAction($"{selectedCard.Title} was shuffled into {selectedCard.NativeDeck.GetFriendlyName()}!", Priority.Medium, GetCardSource(), showCardSource: true);
+                if (base.UseUnityCoroutines)
+                {
+                    yield return base.GameController.StartCoroutine(coroutine);
+                }
+                else
+                {
+                    base.GameController.ExhaustCoroutine(coroutine);
+                }
                 Location selectedLocation = selectedCard.Location;
                 coroutine = GameController.ShuffleCardIntoLocation(HeroTurnTakerController, selectedCard, selectedCard.NativeDeck, false, cardSource: GetCardSource());
                 if (base.UseUnityCoroutines)
