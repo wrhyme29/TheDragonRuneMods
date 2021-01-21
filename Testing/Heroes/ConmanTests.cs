@@ -383,5 +383,24 @@ namespace TheDragonRuneTest
 
         }
 
+        [Test()]
+        public void TestIMisleadYou()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            //Deal 2 psychic damage to a target. Reduce the next damage they would deal by 1.
+            QuickHPStorage(baron);
+            DecisionSelectTarget = baron.CharacterCard;
+            PlayCard("IMisleadYou");
+            QuickHPCheck(-2);
+            QuickHPStorage(bunker);
+            DealDamage(baron, bunker, 2, DamageType.Fire);
+            QuickHPCheck(-1);
+            QuickHPUpdate();
+            DealDamage(baron, bunker, 2, DamageType.Fire);
+            QuickHPCheck(-2);
+        }
+
     }
 }
