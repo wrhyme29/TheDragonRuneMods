@@ -295,6 +295,29 @@ namespace TheDragonRuneTest
 
         }
 
+        [Test()]
+        public void TestWindIllusion()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "TheScholar", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            GoToStartOfTurn(conman);
+            Card changeling = PlayCard("ShadowedIllusion");
+            AssertInPlayArea(conman, changeling);
+            //When this card enters play shuffle all other Changeling cards into {Conman}’s deck."
+            QuickShuffleStorage(conman.TurnTaker.Deck);
+            Card wind = PlayCard("WindIllusion");
+            AssertInDeck(changeling);
+            AssertInPlayArea(conman, wind);
+            QuickShuffleCheck(1);
+            //{Conman} may play another card and use an additional power on his turn.
+            GoToPlayCardPhase(conman);
+            AssertPhaseActionCount(2);
+            GoToUsePowerPhase(conman);
+            AssertPhaseActionCount(2);
+
+        }
+
 
     }
 }
