@@ -50,7 +50,7 @@ namespace TheDragonRune.Conman
                     TriggerType.MoveCard
                 }, additionalCriteria: (PhaseChangeAction pca) => IsNextTurn);
             //If {Conman} takes damage that way, the first time a turn {Conman} would take damage redirect it to the Villain Target with the highest hp and increase the damage by 1.",
-            AddTrigger((DealDamageAction dd) => WasDamagedDealtToConman && !HasBeenSetToTrueThisTurn(FirstTimeDamageDealt), RedirectAndIncreaseResponse, new TriggerType[]
+            AddTrigger((DealDamageAction dd) => WasDamagedDealtToConman && !HasBeenSetToTrueThisTurn(FirstTimeDamageDealt) && dd.Target == CharacterCard, RedirectAndIncreaseResponse, new TriggerType[]
                 {
                     TriggerType.RedirectDamage,
                     TriggerType.IncreaseDamage
