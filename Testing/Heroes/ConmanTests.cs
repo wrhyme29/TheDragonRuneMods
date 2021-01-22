@@ -597,6 +597,82 @@ namespace TheDragonRuneTest
             QuickHPCheck(-3);
         }
 
+        [Test()]
+        public void TestMyTimeToShine_13Cards()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            Card battalion = PlayCard("BladeBattalion");
+            ShuffleTrashIntoDeck(baron);
+            SetHitPoints(conman, 10);
+            Card myTime = GetCard("MyTimeToShine");
+            IEnumerable<Card> toTrash = FindCardsWhere(c => c.Location.IsDeck && c.IsHero && c != myTime).Take(13);
+            PutInTrash(toTrash);
+            //Shuffle all cards in each trash into their respective decks.
+            DecisionSelectTargets = new Card[] { baron.CharacterCard, battalion, bunker.CharacterCard, luminary.CharacterCard };
+            QuickHPStorage(baron.CharacterCard, battalion, conman.CharacterCard, legacy.CharacterCard, bunker.CharacterCard, luminary.CharacterCard);
+            PlayCard(myTime);
+            //For every 3 cards shuffled from the trash this way, {Conman} may deal up to that many targets 2 melee damage, and 1 psychic damage.
+            //Gain X hp, where X is the number of cards shuffled this way / 5
+            //4 targets, 2 HP
+            QuickHPCheck(-3, -3, 2, 0, -3, -3);
+            //If at least 40 cards are shuffled this way, return this card to your hand instead of it going into the trash
+            //not true
+            AssertInTrash(myTime);
+            AssertNumberOfCardsInTrash(baron, 0);
+            AssertNumberOfCardsInTrash(conman, 1);
+            AssertNumberOfCardsInTrash(legacy, 0);
+            AssertNumberOfCardsInTrash(bunker, 0);
+            AssertNumberOfCardsInTrash(luminary, 0);
+            AssertNumberOfCardsInTrash(env, 0);
+
+        }
+
+        [Test()]
+        public void TestMyTimeToShine_40Cards()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            Card battalion = PlayCard("BladeBattalion");
+            ShuffleTrashIntoDeck(baron);
+            SetHitPoints(conman, 10);
+            Card myTime = GetCard("MyTimeToShine");
+            IEnumerable<Card> toTrash = FindCardsWhere(c => c.Location.IsDeck && c.IsHero && c != myTime).Take(43);
+            PutInTrash(toTrash);
+            //Shuffle all cards in each trash into their respective decks.
+            DecisionSelectTargets = new Card[] { baron.CharacterCard, battalion, bunker.CharacterCard, luminary.CharacterCard, legacy.CharacterCard, null };
+            QuickHPStorage(baron.CharacterCard, battalion, conman.CharacterCard, legacy.CharacterCard, bunker.CharacterCard, luminary.CharacterCard);
+            PlayCard(myTime);
+            //For every 3 cards shuffled from the trash this way, {Conman} may deal up to that many targets 2 melee damage, and 1 psychic damage.
+            //Gain X hp, where X is the number of cards shuffled this way / 5
+            //14 targets, 8 HP
+            QuickHPCheck(-3, -3, 8, -3, -3, -3);
+            //If at least 40 cards are shuffled this way, return this card to your hand instead of it going into the trash
+            //not true
+            AssertInHand(myTime);
+            AssertNumberOfCardsInTrash(baron, 0);
+            AssertNumberOfCardsInTrash(conman, 0);
+            AssertNumberOfCardsInTrash(legacy, 0);
+            AssertNumberOfCardsInTrash(bunker, 0);
+            AssertNumberOfCardsInTrash(luminary, 0);
+            AssertNumberOfCardsInTrash(env, 0);
+
+        }
+
+        [Test]
+        public void TestBenchmark()
+        {
+            SetupGameController("BaronBlade", "Benchmark", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+
+            DecisionSelectFunction = 1;
+            Card flyby = PlayCard("FlyBy");
+            AssertInHand(flyby);
+        }
+
 
     }
 }

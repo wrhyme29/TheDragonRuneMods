@@ -245,8 +245,8 @@
 			"body": [
 				"Shuffle all cards in each trash into their respective decks.",
 				"For every 3 cards shuffled from the trash this way, {Conman} may deal up to that many targets 2 melee damage, and 1 psychic damage.",
-				"For every 5 cards shuffled this way, gain 1 hp.",
-				"If 40 cards are shuffled this way, return this card to your hand instead of it going into the trash"
+				"Gain X hp, where X is the number of cards shuffled this way / 5.",
+				"If at least 40 cards are shuffled this way, return this card to your hand instead of it going into the trash"
 			],
 			"flavorQuotes": [{
 				"identifier": "Conman",
