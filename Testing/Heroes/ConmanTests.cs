@@ -661,16 +661,73 @@ namespace TheDragonRuneTest
 
         }
 
-        [Test]
-        public void TestBenchmark()
+        [Test()]
+        public void TestNeverToldYouALie()
         {
-            SetupGameController("BaronBlade", "Benchmark", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
             StartGame();
             DestroyNonCharacterVillainCards();
+            Card battalion = PlayCard("BladeBattalion");
+            //"Deal 2 targets 2 psychic damage. Those targets cannot deal damage until {Conman}'s next turn.
+            DecisionSelectTargets = new Card[] { baron.CharacterCard, battalion };
+            QuickHPStorage(baron.CharacterCard, battalion, conman.CharacterCard, legacy.CharacterCard, bunker.CharacterCard, luminary.CharacterCard);
+            PlayCard("NeverToldYouALie");
+            QuickHPCheck(-2, -2, 0, 0, 0, 0);
 
-            DecisionSelectFunction = 1;
-            Card flyby = PlayCard("FlyBy");
-            AssertInHand(flyby);
+            QuickHPStorage(bunker);
+            DealDamage(baron, bunker, 5, DamageType.Melee);
+            QuickHPCheckZero();
+
+            QuickHPUpdate();
+            DealDamage(battalion, bunker, 5, DamageType.Melee);
+            QuickHPCheckZero();
+
+            //expires
+            GoToStartOfTurn(conman);
+            QuickHPStorage(bunker);
+            DealDamage(baron, bunker, 5, DamageType.Melee);
+            QuickHPCheck(-5);
+
+            QuickHPUpdate();
+            DealDamage(battalion, bunker, 5, DamageType.Melee);
+            QuickHPCheck(-5);
+
+
+        }
+
+        [Test()]
+        public void TestNeverToldYouALie_EvenWhenImmune()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            Card battalion = PlayCard("BladeBattalion");
+            //"Deal 2 targets 2 psychic damage. Those targets cannot deal damage until {Conman}'s next turn.
+            DecisionSelectTargets = new Card[] { baron.CharacterCard, battalion };
+            AddImmuneToDamageTrigger(baron, false, true);
+            QuickHPStorage(baron.CharacterCard, battalion, conman.CharacterCard, legacy.CharacterCard, bunker.CharacterCard, luminary.CharacterCard);
+            PlayCard("NeverToldYouALie");
+            QuickHPCheck(0,0, 0, 0, 0, 0);
+
+            QuickHPStorage(bunker);
+            DealDamage(baron, bunker, 5, DamageType.Melee);
+            QuickHPCheckZero();
+
+            QuickHPUpdate();
+            DealDamage(battalion, bunker, 5, DamageType.Melee);
+            QuickHPCheckZero();
+
+            //expires
+            GoToStartOfTurn(conman);
+            QuickHPStorage(bunker);
+            DealDamage(baron, bunker, 5, DamageType.Melee);
+            QuickHPCheck(-5);
+
+            QuickHPUpdate();
+            DealDamage(battalion, bunker, 5, DamageType.Melee);
+            QuickHPCheck(-5);
+
+
         }
 
 

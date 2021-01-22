@@ -437,7 +437,7 @@
 				"CannotDealDamage"
 			],
 			"body": [
-				"Deal 2 targets 2 psychic damage. Those targets cannot deal damage until {Conman}'s next turn"
+				"Deal 2 targets 2 psychic damage. Those targets cannot deal damage until {Conman}'s next turn."
 			],
 			"flavorQuotes": [{
 				"identifier": "Conman",
