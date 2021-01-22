@@ -799,6 +799,36 @@ namespace TheDragonRuneTest
 
         }
 
+        [Test()]
+        public void TestTOOCloseToHome()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            Card battalion = PlayCard("BladeBattalion");
+            //Reduce the first damage dealt each turn by a Villain target by 1.
+            PlayCard("TooCloseToHome");
+            QuickHPStorage(bunker);
+            DealDamage(baron, bunker, 4, DamageType.Fire);
+            QuickHPCheck(-3);
+
+            //first damage only
+            QuickHPUpdate();
+            DealDamage(baron, bunker, 4, DamageType.Fire);
+            QuickHPCheck(-4);
+
+            //resets next turn
+            GoToNextTurn();
+            QuickHPUpdate();
+            DealDamage(battalion, bunker, 4, DamageType.Fire);
+            QuickHPCheck(-3);
+
+            //across all villain targets
+            QuickHPUpdate();
+            DealDamage(baron, bunker, 4, DamageType.Fire);
+            QuickHPCheck(-4);
+        }
+
 
     }
 }
