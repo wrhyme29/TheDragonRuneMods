@@ -765,6 +765,40 @@ namespace TheDragonRuneTest
 
         }
 
+        [Test()]
+        public void TestTeleportSpam()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            Card battalion = PlayCard("BladeBattalion");
+            //The first time each turn {Conman} would take damage, redirect it to a Villain Target.
+            PlayCard("TeleportSpam");
+            DecisionSelectCard = baron.CharacterCard;
+
+            QuickHPStorage(baron.CharacterCard, battalion, conman.CharacterCard, legacy.CharacterCard, bunker.CharacterCard, luminary.CharacterCard);
+            DealDamage(battalion, conman, 2, DamageType.Melee);
+            QuickHPCheck(-2, 0, 0, 0, 0, 0);
+
+            //only first damage per turn
+            QuickHPUpdate();
+            DealDamage(battalion, conman, 2, DamageType.Melee);
+            QuickHPCheck(0, 0, -2, 0, 0, 0);
+
+            //resets next turn
+            GoToNextTurn();
+
+            //only conman
+            QuickHPUpdate();
+            DealDamage(battalion, legacy, 2, DamageType.Melee);
+            QuickHPCheck(0, 0, 0, -2, 0, 0);
+
+            QuickHPUpdate();
+            DealDamage(battalion, conman, 2, DamageType.Melee);
+            QuickHPCheck(-2, 0, 0, 0, 0, 0);
+
+        }
+
 
     }
 }
