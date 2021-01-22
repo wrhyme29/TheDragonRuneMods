@@ -829,6 +829,20 @@ namespace TheDragonRuneTest
             QuickHPCheck(-4);
         }
 
+        [Test()]
+        public void TestWhosThatNextToYou()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            Card battalion = PlayCard("BladeBattalion");
+            //One Villain Target deals 2 melee damage to another target.
+            DecisionSelectCards = new Card[] { baron.CharacterCard, legacy.CharacterCard };
+            QuickHPStorage(baron.CharacterCard, battalion, conman.CharacterCard, legacy.CharacterCard, bunker.CharacterCard, luminary.CharacterCard);
+            PlayCard("WhosThatNextToYou");
+            QuickHPCheck(0, 0, 0, -3, 0, 0);
+        }
+
 
     }
 }
