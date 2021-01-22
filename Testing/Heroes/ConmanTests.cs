@@ -730,6 +730,25 @@ namespace TheDragonRuneTest
 
         }
 
+        [Test()]
+        public void TestSwitcherooStrikes()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            Card battalion = PlayCard("BladeBattalion");
+            PlayCard("TeleportSpam");
+            IEnumerable<Card> toTrash = FindCardsWhere(c => conman.TurnTaker.Deck.HasCard(c) && IsTeleport(c)).Take(2);
+            PutInTrash(toTrash);
+            // Deal X targets 1 melee and 3 psychic damage, where X is the number of teleports in play and in { Conman}’s Trash."
+            DecisionSelectTargets = new Card[] { baron.CharacterCard, battalion, luminary.CharacterCard };
+            QuickHPStorage(baron.CharacterCard, battalion, conman.CharacterCard, legacy.CharacterCard, bunker.CharacterCard, luminary.CharacterCard);
+            PlayCard("SwitcherooStrikes");
+            QuickHPCheck(-4, -4, 0, 0, 0, -4);
+
+
+        }
+
 
     }
 }
