@@ -11,9 +11,30 @@ using TheDragonRune.Conman;
 
 namespace TheDragonRuneTest
 {
+
     [TestFixture()]
     public class ConmanTests : CustomBaseTest
     {
+
+        #region ConmanHelperFunctions
+        public static readonly string ChangelingKeyword = "changeling";
+        public static readonly string IllusionKeyword = "illusion";
+        public static readonly string TeleportKeyword = "teleport";
+
+        protected bool IsChangeling(Card card)
+        {
+            return card != null && base.GameController.DoesCardContainKeyword(card, ChangelingKeyword);
+        }
+        protected bool IsTeleport(Card card)
+        {
+            return card != null && base.GameController.DoesCardContainKeyword(card, TeleportKeyword);
+        }
+        protected bool IsIllusion(Card card)
+        {
+            return card != null && base.GameController.DoesCardContainKeyword(card, IllusionKeyword);
+        }
+
+        #endregion
 
         private void SetupIncap(TurnTakerController villain)
         {
@@ -542,6 +563,40 @@ namespace TheDragonRuneTest
             AssertInTrash(changeling);
             AssertInPlayArea(conman, more);
         }
+        [Test()]
+        public void TestMyStuffNow()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            Card battalion = PlayCard("BladeBattalion");
+
+            IEnumerable<Card> putInTrash = FindCardsWhere(c => conman.TurnTaker.Deck.HasCard(c) && (IsIllusion(c) || IsTeleport(c))).Take(2);
+            PutInTrash(putInTrash);
+            //Choose a Villain target, reduce all damage they would deal by X until the start of {Conman}’s turn, where X = the number of Illusions and teleports in {Conman}’s Trash.
+            DecisionSelectCard = baron.CharacterCard;
+            PlayCard("MyStuffNow");
+            QuickHPStorage(bunker);
+            DealDamage(baron, bunker, 3, DamageType.Fire);
+            QuickHPCheck(-1);
+
+            //not just next damage
+            QuickHPUpdate();
+            DealDamage(baron, bunker, 3, DamageType.Fire);
+            QuickHPCheck(-1);
+
+            //only that villain target
+            QuickHPUpdate();
+            DealDamage(battalion, bunker, 3, DamageType.Fire);
+            QuickHPCheck(-3);
+
+            //expires
+            GoToStartOfTurn(conman);
+            QuickHPUpdate();
+            DealDamage(baron, bunker, 3, DamageType.Fire);
+            QuickHPCheck(-3);
+        }
+
 
     }
 }

@@ -15,10 +15,20 @@ namespace TheDragonRune.Conman
         }
 
 		public static readonly string ChangelingKeyword = "changeling";
+		public static readonly string IllusionKeyword = "illusion";
+		public static readonly string TeleportKeyword = "teleport";
 
 		protected bool IsChangeling(Card card)
 		{
 			return card != null && base.GameController.DoesCardContainKeyword(card, ChangelingKeyword);
+		}
+		protected bool IsTeleport(Card card)
+		{
+			return card != null && base.GameController.DoesCardContainKeyword(card, TeleportKeyword);
+		}
+		protected bool IsIllusion(Card card)
+		{
+			return card != null && base.GameController.DoesCardContainKeyword(card, IllusionKeyword);
 		}
 
 
