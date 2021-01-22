@@ -15,7 +15,7 @@
 			"hitpointColor": "EA7527",
 			"character": true,
 			"powers": [
-				"The next time {Conman} would take Damage, redirect it to another  hero target and reduce the damage by 2."
+				"The next time {Conman} would take Damage, redirect it to another hero target and reduce the damage by 2."
 			],
 			"icons": [
 				"HasPower",
