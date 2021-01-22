@@ -13,9 +13,8 @@ namespace TheDragonRuneTest
 {
 
 	[TestFixture]
-	public class MrNobleTests : BaseTest
+	public class MrNobleTests : CustomBaseTest
 	{
-		protected TurnTakerController MrNoble => FindVillain("MrNoble");
 
 		private bool IsHighTierEnforcer(Card card)
 		{
@@ -30,22 +29,6 @@ namespace TheDragonRuneTest
 		private bool IsEnforcer(Card card)
 		{
 			return card != null && (base.GameController.DoesCardContainKeyword(card, "high tier enforcer") || base.GameController.DoesCardContainKeyword(card, "mid tier enforcer") || base.GameController.DoesCardContainKeyword(card, "lower tier enforcer"));
-		}
-
-		private void PreventEndOfTurnEffects(TurnTakerController ttc, Card cardToPrevent)
-		{
-			PreventPhaseEffectStatusEffect preventPhaseEffectStatusEffect = new PreventPhaseEffectStatusEffect();
-			preventPhaseEffectStatusEffect.UntilStartOfNextTurn(ttc.TurnTaker);
-			preventPhaseEffectStatusEffect.CardCriteria.IsSpecificCard = cardToPrevent;
-			RunCoroutine(base.GameController.AddStatusEffect(preventPhaseEffectStatusEffect, showMessage: true, ttc.CharacterCardController.GetCardSource()));
-		}
-
-		private void PreventStartOfTurnEffects(TurnTakerController ttc, Card cardToPrevent)
-		{
-			PreventPhaseEffectStatusEffect preventPhaseEffectStatusEffect = new PreventPhaseEffectStatusEffect(Phase.Start);
-			preventPhaseEffectStatusEffect.UntilEndOfNextTurn(ttc.TurnTaker);
-			preventPhaseEffectStatusEffect.CardCriteria.IsSpecificCard = cardToPrevent;
-			RunCoroutine(base.GameController.AddStatusEffect(preventPhaseEffectStatusEffect, showMessage: true, ttc.CharacterCardController.GetCardSource()));
 		}
 
 		[Test]
