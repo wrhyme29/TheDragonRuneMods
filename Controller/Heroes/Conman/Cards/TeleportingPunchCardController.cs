@@ -14,6 +14,21 @@ namespace TheDragonRune.Conman
 
         }
 
+        public override IEnumerator Play()
+        {
+            //Deal 2 Melee Damage to 2 different Targets.
+            IEnumerator coroutine = GameController.SelectTargetsAndDealDamage(HeroTurnTakerController, new DamageSource(GameController, CharacterCard), 2, DamageType.Melee, 2, false, 2, cardSource: GetCardSource());
+            if (base.UseUnityCoroutines)
+            {
+                yield return base.GameController.StartCoroutine(coroutine);
+            }
+            else
+            {
+                base.GameController.ExhaustCoroutine(coroutine);
+            }
+            yield break;
+        }
+
 
     }
 }

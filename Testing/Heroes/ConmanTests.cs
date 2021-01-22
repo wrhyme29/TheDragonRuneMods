@@ -749,6 +749,22 @@ namespace TheDragonRuneTest
 
         }
 
+        [Test()]
+        public void TestTeleportingPunch ()
+        {
+            SetupGameController("BaronBlade", "TheDragonRune.Conman", "Legacy", "Bunker", "Luminary", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+            Card battalion = PlayCard("BladeBattalion");
+            //Deal 2 Melee Damage to 2 different Targets.
+            DecisionSelectTargets = new Card[] { baron.CharacterCard, battalion };
+            QuickHPStorage(baron.CharacterCard, battalion, conman.CharacterCard, legacy.CharacterCard, bunker.CharacterCard, luminary.CharacterCard);
+            PlayCard("TeleportingPunch");
+            QuickHPCheck(-2, -2, 0, 0, 0, 0);
+
+
+        }
+
 
     }
 }
